@@ -1,0 +1,341 @@
+<nav class="navbar navbar-expand-lg navbarHeader">
+    <img src="../../assets/icons/ibmlogo.png" class="logo" >
+    <div class="username">Welcome : John Doe</div>
+  </nav>
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-2 offset-md-8">
+            <button type="button" class="createSOWBtn" (click)="navigateToChooseSoW()">Create SoW</button>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="createSOWBtn" (click)="navigateToSearchSoW()">Search SoW</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <header>SoW Tracker</header>
+    </div>
+    <div class="row addBorderBottom addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Original SoW </label>
+        </div>
+        <div class="col-md-3">
+            <span> {{ response?.originalSoWPattern}} </span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> SoW</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{ response?.soWPattern}} </span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom">
+        <!-- <div class="col-md-3 addBorderRight">
+            <label> SoW/SE </label>
+        </div> -->
+        <!-- <div class="col-md-3">
+            <span>{{response?.soWType}} </span>
+        </div> -->
+        <div class="col-md-3 addBorderRight">
+            <label> Description</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.description}} </span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Business Unit </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.businessUnit}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> CIO</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.cio}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Chubb Manager </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.chubbManager}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Status</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.status}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Creation Timeline </label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.creationTimeLine | date }}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Updation Timeline</label>
+        </div>
+        <div class="col-md-3">
+            <span>  {{response?.updationTimeLine | date }} </span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Approval Timeline </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.approvalTimeLine | date }}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Renewal Frequency</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.renewalFrequency}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Start Date </label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.startDate | date }}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> End Date</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.endDate | date }}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> TCV </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.tcv}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Value</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.value}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> ILC </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.ilc}}</span>
+        </div>
+
+    </div>
+
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> IBM Onshore DM </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.ibmOnShoreDM}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> IBM Offshore DM</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.ibmOffShoreDM}} </span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Contract Type 1 </label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.contractType1}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Contract Type 2</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.contractType2}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Is Pricing (GPE) finalized? </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.pricingFinalized}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Is DCA approval done?</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.dcaApprovalDone}} </span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Is the contract registration done? </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.contractRegDone}} </span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Staffing Complete?</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.staffingComplete}}</span>
+        </div>
+    </div>
+
+
+    <div class="row addBorderBottom addMarginTop addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Planned GP </label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.plannedGP}}</span>
+        </div>
+        <!-- <div class="col-md-3 addBorderRight">
+            <label>Actual GP</label>
+        </div>
+        <div class="col-md-3">
+            <span> {{response?.actualGP}} </span>
+        </div> -->
+    </div>
+
+    <div class="row addBorderBottom ">
+        <div class="col-md-3 addBorderRight">
+            <label> Stage</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.stage}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> From IBS</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.fromIBS}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom ">
+        <div class="col-md-3 addBorderRight">
+            <label> Sales Connect</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.salesConnect}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Signed Date if Signed</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.dateSubmissionSigning |date}}</span>
+        </div>
+    </div>
+
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Date Submitted for signing</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.signDateIfSigned |date}}</span>
+        </div>
+
+    </div>
+
+    <div class="row addBorderBottom addBorderTop ">
+        <div class="col-md-3 addBorderRight">
+            <label> Opportunity ID</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.opportunityID}}</span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label>Remarks</label>
+        </div>
+        <div class="col-md-3">
+            <span>{{response?.remarks}}</span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Reviewer</label>
+        </div>
+        <div class="col-md-3">
+            <span></span>
+        </div>
+        <div class="col-md-3 addBorderRight">
+            <label> Approver</label>
+        </div>
+        <div class="col-md-3">
+            <span></span>
+        </div>
+    </div>
+
+    <div class="row addBorderBottom addBorderTop">
+        <div class="col-md-3 addBorderRight">
+            <label> Attachments- SoW</label>
+        </div>
+        <div class="col-md-3">
+            <span><a href="https://ibm.ent.box.com" target="_blank">SoW.pdf</a></span>
+        </div>
+
+    </div>
+    <div class="row addBorderBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Attachments- Estimates</label>
+        </div>
+        <div class="col-md-3">
+            <span><a href="https://ibm.ent.box.com" target="_blank">Estimates.pdf</a></span>
+        </div>
+    </div>
+    <div class="row addBorderBottom addMarginBottom">
+        <div class="col-md-3 addBorderRight">
+            <label> Attachments- Staffing Plan</label>
+        </div>
+        <div class="col-md-3">
+            <span><a href="https://ibm.ent.box.com" target="_blank">Staffing Plan.pdf</a></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+          <button type="button" class="searchBtn" (click) = "navigateToEditSoWTracker()">Edit</button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="resetBtn" >Track SoW</button>
+        </div>
+      </div>
+</div>
+
+<div class="footer">
+    <div class="footer__social-section-links">
+      <div class="footer__social-section-links-item">
+        © 2022 IBM
+      </div>
+  
+  </div></div>

@@ -1,0 +1,306 @@
+<nav class="navbar navbar-expand-lg navbarHeader">
+    <img src="../../assets/icons/ibmlogo.png" class="logo" >
+    <div class="username">Welcome : John Doe</div>
+  </nav>
+
+<div class="container" *ngIf="isReady">
+    <div class="row">
+
+        <div class="col-md-2  offset-md-10">
+            <button type="button" class="createSOWBtn" (click)="goToDashboard()">Search SoW</button>
+        </div>
+
+    </div>
+    <div class="row">
+        <header>SoW Review</header>
+    </div>
+
+    <!-- progress bar -->
+    <div class="progressbar">
+        
+        <div class="progress-step" data-title="Create SoW"><div class="progress" ></div> </div>
+        <div class="progress-step" data-title="Testing team & Architect Review"><div class="progress"></div></div>
+        <div class="progress-step" data-title="Submitted by Offshore PM"><div class="progress" ></div></div>
+        <div class="progress-step" data-title="1st Approval Pending"><div class="progress" ></div></div>
+        <div class="progress-step" data-title="2nd Approval Pending"><div class="progress" ></div></div>
+        <div class="progress-step" data-title="Final Approval Pending"><div class="progress"></div></div>
+    </div>
+   
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>SoW</mat-label>
+                <input matInput [disabled]="true" [value]="reviewDetails.soWPattern">
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Name</mat-label>
+                <input matInput [disabled]="true"  value="Kishore">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Date</mat-label>
+                <input matInput [disabled]="true"  [value]="formatDate(reviewDetails.soWCreatedOn)">
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <input matInput [disabled]="true"  [value]="reviewDetails.soWStatus">
+            </mat-form-field>
+        </div>
+
+    </div>
+   
+    <div class="row">
+    <mat-accordion class="headers-align" multi>
+     
+        <mat-expansion-panel [expanded]="step==1">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Testing Team & Architect Review
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <form [formGroup]="reviewFormSection2">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Is it Testing Team Approved?</mat-label>
+                        <mat-select  formControlName='TestApproved' [disabled]="step!=1">
+                            <mat-option value="Yes"> Yes </mat-option>
+                            <mat-option value="No">No</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Approver Name</mat-label>
+                        <input matInput  formControlName='TestApprovedName'  [readonly]="step!=1">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Approver Email ID</mat-label>
+                        <input matInput  formControlName='TestEmailID'  [readonly]="step!=1">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Is it Architect Approved?</mat-label>
+                        <mat-select  formControlName='ArcApproved'  [disabled]="step!=1">
+                            <mat-option value="Yes"> Yes </mat-option>
+                            <mat-option value="No">No</mat-option>
+
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Approver Name</mat-label>
+                        <input matInput  formControlName='ArcApprovedName'  [readonly]="step!=1">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Approver Email ID</mat-label>
+                        <input matInput  formControlName='ArcEmailID'  [readonly]="step!=1">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Reason</mat-label>
+                        <input matInput  formControlName='Reason'  [readonly]="step!=1">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button type="button" type="submit" style="display:none" id="reviewFormSection2"></button>
+            </form>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>
+    <div class="row">
+    <mat-accordion class="headers-align" multi>
+        <mat-expansion-panel [expanded]="step==2">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Submitted by Offshore PM
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            <form [formGroup]="reviewFormSection3">
+            <div class="row">
+
+                
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName='OffshorePMName' [readonly]="step!=2">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput formControlName='OffshorePMEmail' [readonly]="step!=2">
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <button type="button" type="submit" style="display:none" id="reviewFormSection3"
+            ></button>
+        </form>
+            
+        </mat-expansion-panel>
+
+    </mat-accordion></div>
+    <div class="row">
+    <mat-accordion class="headers-align" multi>
+        <mat-expansion-panel [expanded]="step==3">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    1st Approval- Offshore DM
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            
+
+                <form [formGroup]="reviewFormSection4">
+                <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="OffshoreDMName" [readonly]="step!=3">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput formControlName="OffshoreDMEmail" [readonly]="step!=3">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button type="button" type="submit" style="display:none" id="reviewFormSection4"></button>
+            </form>
+            
+
+            
+        </mat-expansion-panel>
+
+    </mat-accordion></div>
+    <div class="row">
+    <mat-accordion class="headers-align" multi>
+        <mat-expansion-panel [expanded]="step==4">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    2nd Approval- Onshore DM
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+            </mat-expansion-panel-header>
+
+                <form [formGroup]="reviewFormSection5">
+                 <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="OnshoreDMName" [readonly]="step!=4">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput formControlName="OnshoreDMEmail" [readonly]="step!=4">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button type="button" type="submit" style="display:none" id="reviewFormSection5"></button>
+            </form>
+            
+
+            
+        </mat-expansion-panel>
+
+    </mat-accordion></div>
+    <div class="row">
+    <mat-accordion class="headers-align" multi>
+        <mat-expansion-panel [expanded]="step==5">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Final Approval- Pricing Reviewer
+                </mat-panel-title>
+                <!-- <mat-panel-description>
+          Type your name and age
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description> -->
+            </mat-expansion-panel-header>
+
+                <form [formGroup]="reviewFormSection6">
+                <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="FinalAprName" [readonly]="step!=5">
+                    </mat-form-field>
+                </div>
+
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Email ID</mat-label>
+                        <input matInput formControlName="FinalAprEmail" [readonly]="step!=5">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button type="button" type="submit" style="display:none" id="reviewFormSection6"></button>
+            </form>
+            
+
+            
+        </mat-expansion-panel>
+
+    </mat-accordion></div>
+    <div class="row" style="margin-top: 51px">
+        <div class="col-md-2">
+          <button type="button" class="searchBtn" (click)="openReviewDialog()">Submit</button>
+        </div>
+        <div class="col-md-10">
+          <button type="button" class="resetBtn" (click)="goToDashboard()">Cancel</button>
+        </div>
+      </div>
+</div><div class="footer">
+    <div class="footer__social-section-links">
+      <div class="footer__social-section-links-item">
+        © 2022 IBM
+      </div>
+  
+  </div></div>

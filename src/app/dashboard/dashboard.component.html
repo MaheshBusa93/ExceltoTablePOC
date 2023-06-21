@@ -1,0 +1,99 @@
+<nav class="navbar navbar-expand-lg navbarHeader">
+  <img src="../../assets/icons/ibmlogo.png" class="logo" >
+  <div class="username">Welcome : John Doe</div>
+</nav>
+<form [formGroup]="dashboardForm" (ngSubmit)="onSubmit()">
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-2 offset-md-10">
+      <button type="button" class="createSOWBtn" (click)="navigateTochooseSOW()">Create SOW</button>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-md-2 offset-md-10">
+      <mat-checkbox (change)="searchBySoWNoCheckBox($event)">Search by SoW No.</mat-checkbox>
+    </div>
+  </div>
+  <div class="row">
+    <header>Welcome to SoW Tracker</header>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Business Unit</mat-label>
+        <mat-select [disabled]="!isDisabled" (selectionChange)="getCIOOptions($event.value)" formControlName="businessUnitValue" [(ngModel)]="buModel">
+          <mat-option *ngFor="let buname of posts" [value]="buname.businessUnitId"> {{buname.businessUnitName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>CIO</mat-label>
+        <mat-select [disabled]="!isDisabled" (selectionChange)="getChubbManagerOptions($event.value)" formControlName="cioValue" [(ngModel)]="cioModel">
+          <mat-option *ngFor="let cioOption of cioValues " [value]="cioOption.cioId"> {{cioOption.cioName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>Chubb Manager</mat-label>
+        <mat-select [disabled]="!isDisabled" (selectionChange)="getChubbManagerID($event.value)" formControlName="chubbMgrValue" [(ngModel)]="chubbMgrModel">
+          <mat-option *ngFor="let chubbName of chubbValues" [value]="chubbName.chubbManagerId">
+            {{chubbName.chubbManagerName}} </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <mat-form-field appearance="fill">
+        <mat-label>SoW Number</mat-label>
+        <input matInput [disabled]="isDisabled" (input)="onSearchChange($event)"
+        [(ngModel)]='msisdn' [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-2">
+      <mat-checkbox class="addMarginBottom">Advanced Search</mat-checkbox>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-md-2">
+      <button type="button" class="searchBtn" (click)="getGridDetails()" 
+      [ngClass]="{'disableBtn': buttonDisabled === true, 'enableBtn' : buttonDisabled === false }"
+      [disabled]="buttonDisabled">Search</button>
+    </div>
+    <div class="col-md-2">
+      <button type="button" class="resetBtn" (click)="resetForm()">Reset</button>
+    </div>
+  </div>
+  <div class="row" class="addMarginBottom">
+    <mat-radio-group>
+      <mat-radio-button class="radioBtn" value="AY" (change)="radioChange($event)">Requests assigned to you</mat-radio-button>
+      <mat-radio-button class="radioBtn" value="AG" (change)="radioChange($event)">Requests assigned to your group</mat-radio-button>
+      <mat-radio-button class="radioBtn" value="ALL" (change)="radioChange($event)">All Requests</mat-radio-button>
+      <button type="button" class="exportBtn" (click)="onBtnExport()">Export</button>
+    </mat-radio-group>
+  </div>
+  <ag-grid-angular style="width: auto; height: 400px;" class="ag-theme-alpine" [rowData]="rowData"
+    [columnDefs]="gridOptions.columnDefs" [pagination]="true" [paginationPageSize]="paginationPageSize"
+    (cellClicked)="onCellClicked($event)" [masterDetail]="true" [detailCellRendererParams]="detailCellRendererParams"
+    [detailRowHeight]="70" (gridReady)="onGridReady($event)">
+  </ag-grid-angular>
+
+</div>
+</form>
+<div class="footer">
+  <div class="footer__social-section-links">
+    <div class="footer__social-section-links-item">
+      © 2022 IBM
+    </div>
+
+  </div>
+</div>

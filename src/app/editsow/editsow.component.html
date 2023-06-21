@@ -1,0 +1,416 @@
+<nav class="navbar navbar-expand-lg navbarHeader">
+    <img src="../../assets/icons/ibmlogo.png" class="logo" >
+    <div class="username">Welcome : John Doe</div>
+  </nav>
+<div class="container" *ngIf="formReady">
+
+    <div class="row">
+        <div class="col-md-2 offset-md-8">
+            <button type="button" class="createSOWBtn" (click)="navigateTochooseSOW()">Create SoW</button>
+        </div>
+
+        <div class="col-md-2">
+            <button type="button" class="createSOWBtn" (click)="goToDashboard()">Search SoW</button>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <header>Edit SoW</header>
+    </div>
+    <form [formGroup]="sowEditForm" >
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Original SoW</mat-label>
+                <input matInput readonly="true" formControlName='OriginalSoWPattern'>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>SoW</mat-label>
+                <input matInput readonly="true" formControlName='SoWCRPattern'>
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="col-md-4">
+
+            <mat-form-field appearance="fill">
+                <mat-label>SoW/SE</mat-label>
+                <mat-select>
+                    <mat-option value="html"> CM1 </mat-option>
+                    <mat-option value="css">CM2</mat-option>
+                    <mat-option value="js">CM3</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div> -->
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <mat-form-field appearance="fill">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="Description">
+                <!-- <mat-error *ngIf="sowForm.getControl('Description')?.invalid"></mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Business Unit</mat-label>
+                <mat-select (selectionChange)="getCIOOptions($event.value)" formControlName="BusinessUnit">
+                    <mat-option *ngFor="let buname of posts" [value]="buname.businessUnitId">
+                        {{buname?.businessUnitName}}
+                    </mat-option>
+
+                </mat-select>
+                <!-- <mat-error *ngIf="sowForm.getControl('BusinessUnit')?.invalid"></mat-error> -->
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>CIO</mat-label>
+                <mat-select (selectionChange)="getChubbManagerOptions($event.value)" formControlName="CIO">
+                    <mat-option *ngFor="let cioOption of cioValues " [value]="cioOption.cioId"> {{cioOption.cioName}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Chubb Manager</mat-label>
+                <mat-select formControlName="ChubbManager">
+                    <mat-option *ngFor="let chubbName of chubbValues" [value]="chubbName.chubbManagerId">
+                        {{chubbName.chubbManagerName}} </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Status</mat-label>
+                <mat-select formControlName="Status">
+                    <mat-option value="SoW SIGNED"> SoW SIGNED</mat-option>
+                    <mat-option value="SoW SUBMITTED">SoW SUBMITTED
+                    </mat-option>
+                    <mat-option value="Withdrawn">WITHDRAWN</mat-option>
+                    <mat-option value="On Hold">ON HOLD
+                    </mat-option>
+                    <mat-option value="SOW Being Solutioned">SoW BEING SOLUTIONED
+                    </mat-option>
+                    <mat-option value="IN PROCESS-OUT FOR SIGNATURE">IN PROCESS-OUT FOR SIGNATURE
+                    </mat-option>
+                    <mat-option value="IN PROCESS-PM">IN PROCESS-PM
+                    </mat-option>
+                    <mat-option value="IN PROCESS-CONTRACTS">IN PROCESS-CONTRACTS </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Creation Timeline</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="CreationTimeLine">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Updation Timeline</mat-label>
+                <input matInput [matDatepicker]="picker1" formControlName="UpdationTimeLine">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Approval Timeline</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="ApprovalTimeLine">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Renewal Frequency</mat-label>
+                <mat-select formControlName="RenewalFrequency">
+                    <mat-option value="NA"> NA </mat-option>
+                    <mat-option value="QUARTERLY">QUARTERLY</mat-option>
+                    <mat-option value="HALF-YEARLY">HALF-YEARLY</mat-option>
+                    <mat-option value="ANNUALLY">ANNUALLY</mat-option>
+                    <mat-option value="CLIENT FREQUENCY">CLIENT FREQUENCY</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="picker3" formControlName="StartDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
+                <mat-datepicker #picker3></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="picker4" formControlName="EndDate">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                <mat-datepicker #picker4></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>TCV</mat-label>
+                <input  type="number" matInput formControlName="TCV"><span matPrefix>$ &nbsp;</span>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Value</mat-label>
+                <input type="number" matInput formControlName="Value"><span matPrefix>$ &nbsp;</span>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>ILC Work No</mat-label>
+                <input matInput formControlName="ILC">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>IBM Onshore DM</mat-label>
+                <mat-select formControlName="IBMOnShoreDM">
+                    <mat-option *ngFor="let onshoreDM of onshoreDMOptions" [value]="onshoreDM.onshoreDMId">
+                        {{onshoreDM.onShoreDMName}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>IBM Offshore DM</mat-label>
+                <mat-select formControlName="IBMOffShoreDM">
+                    <mat-option *ngFor="let offshoreDM of offshoreDMOptions" [value]="offshoreDM.offshoreDMId">
+                        {{offshoreDM.offShoreDMName}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Contract Type 1</mat-label>
+                <mat-select formControlName="ContractType1">
+                    <mat-option value="FP"> FP </mat-option>
+                    <mat-option value="T&M">T&M</mat-option>
+                    <mat-option value="Staff Aug"> Staff Aug </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Contract Type 2</mat-label>
+                <mat-select formControlName="ContractType2">
+                    <mat-option value="Development"> Development </mat-option>
+                    <mat-option value="Support"> Support </mat-option>
+                    <mat-option value="Maintenance/Production Support"> Maintenance/Production Support </mat-option>
+                    <mat-option value="Production Support"> Production Support </mat-option>
+                    <mat-option value="SE and Support"> SE and Support </mat-option>
+                    <mat-option value="Maintenance"> Maintenance </mat-option>
+                    <mat-option value="QE Support"> QE Support </mat-option>
+                    <mat-option value="Support and Enhancement"> Support and Enhancement </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Is Pricing (GPE) finalized?</mat-label>
+                <mat-select formControlName="PricingFinalized">
+                    <mat-option value="Yes"> Yes </mat-option>
+                    <mat-option value="No">No</mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Is DCA approval done?</mat-label>
+                <mat-select formControlName="DCAApprovalDone">
+                    <mat-option value="Yes"> Yes </mat-option>
+                    <mat-option value="No">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Is the contract registration done?</mat-label>
+                <mat-select formControlName="ContractRegDone">
+                    <mat-option value="Yes"> Yes </mat-option>
+                    <mat-option value="No">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Staffing complete?</mat-label>
+                <mat-select formControlName="StaffingComplete">
+                    <mat-option value="Yes"> Yes </mat-option>
+                    <mat-option value="No">No</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Planned GP</mat-label>
+                <input matInput formControlName="PlannedGP" (keydown)="checkPercentagePattern($event)"><span matSuffix>% &nbsp;</span>
+            </mat-form-field>
+        </div>
+
+        <!-- <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Actual GP</mat-label>
+                <input matInput formControlName="ActualGP">
+            </mat-form-field>
+        </div> -->
+
+    </div>
+
+  <div class="row">
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>Stage</mat-label>
+            <mat-select formControlName="Stage">
+                <mat-option value="Open"> Open </mat-option>
+                <mat-option value="Close"> Close </mat-option>
+                <mat-option value="Negotiate"> Negotiate </mat-option>
+                <mat-option value="Propose"> Propose </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>From IBS</mat-label>
+            <mat-select  formControlName="FromIBS">
+                <mat-option value="Yes"> Yes </mat-option>
+                <mat-option value="No">No</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>Sales Connect</mat-label>
+            <input matInput  formControlName="SalesConnect">
+        </mat-form-field>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>Date Submitted for signing</mat-label>
+            <input matInput [matDatepicker]="picker5"  formControlName="DateSubmissionSigning">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker5"></mat-datepicker-toggle>
+            <mat-datepicker #picker5></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>Signed Date if Signed</mat-label>
+            <input matInput [matDatepicker]="picker6" formControlName="SignDateIfSigned">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+            <mat-datepicker #picker6></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div>
+  <hr>
+
+  <div class="row">
+    <div class="col-md-4">
+        <mat-form-field appearance="fill">
+            <mat-label>Opportunity ID</mat-label>
+            <input matInput formControlName="OpportunityID">
+        </mat-form-field>
+    </div>
+
+    <div class="row">
+        <mat-form-field>
+            <textarea matInput placeholder="Remarks" formControlName="Remarks">
+        </textarea>
+        </mat-form-field>
+    </div>
+
+    <div class="row"> 
+        <div class="col-md-2">
+          <button type="button" type="submit" class="searchBtn" (click)="updateSow()">Save</button>
+        </div>
+        <div class="col-md-2">
+          <button type="button" class="resetBtn">Cancel</button>
+        </div>
+      </div>
+
+  </div>
+  <hr>
+</form>
+</div>
+<div *ngIf="!formReady" style="text-align: center;margin-top: 100px;font-size: large;">
+loading....
+<!-- <ngx-spinner type="ball-scale-multiple"></ngx-spinner> -->
+</div>
+<div class="footer">
+    <div class="footer__social-section-links">
+      <div class="footer__social-section-links-item">
+        © 2022 IBM
+      </div>
+  
+  </div></div>

@@ -1,0 +1,106 @@
+.createSOWBtn {
+    margin-top: 45px;
+    border: 1px solid #0F62FE;
+    padding: 8px 28px;
+    background: white;
+    margin-bottom: 27.1px;
+}
+.navbarHeader {
+    background-color: black;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .logo{
+        width: 93px;
+        height: 25px;
+        margin-left: 53px;
+    }
+    .username{
+        color: white;
+        right: 0px;
+        margin-right: 145px;
+        font-size: large;
+    }
+   
+}
+header {
+    letter-spacing: 0px;
+    color: #000000;
+    opacity: 1;
+    font-family: "ChubbPublico-Roman";
+    font-size: 23px;
+    //font-weight: bold;
+    margin-bottom: 16.9px;
+}
+label {
+    text-align: left;
+    font: normal normal 600 16px/20px IBM Plex Sans;
+    letter-spacing: 0px;
+    color: #14171A;
+    opacity: 1;
+}
+span {
+    text-align: left;
+    font: normal normal normal 16px/19px Lato;
+    letter-spacing: 0px;
+    color: #14171A;
+    opacity: 1;
+}
+
+.addBorderTop {
+    border-top: rgb(0 0 0 / 20%) 1.5px solid;
+}
+.addBorderRight {
+    border-right: rgb(0 0 0 / 20%) 1.5px solid;
+}
+
+.addBorderBottom {
+    border-bottom: rgb(0 0 0 / 20%) 1.5px solid;
+}
+
+.addMarginTop {
+    margin-top: 50px;
+}
+
+.addMarginBottom {
+    margin-bottom: 50px;
+}
+.searchBtn {
+    background-color: #0F62FE;
+    border: 1px solid #0F62FE;
+    padding: 8px 28px;
+    margin-bottom: 27.1px;
+    color: white;
+}
+.resetBtn {
+    border: 1px solid #0F62FE;
+    padding: 8px 28px;
+    background: white;
+    margin-bottom: 27.1px;
+    margin-left: -45px;
+}
+
+.footer {
+    &__social-section-links {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-top: 25px;
+    padding-bottom: 16px;
+    font-weight: 400;
+    font-size: 12px;
+    font-family: var(--font-secondary-regular);
+    line-height: 20px;
+    padding-left: 150px;
+
+    &-item {
+      margin-right: 16px;
+      color: #000000;
+      font-family: Lato;
+      font-size: 12px;
+      letter-spacing: 0;
+      line-height: 20px;
+    }
+  }
+}

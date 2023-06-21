@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbarHeader">
+<img src="../../assets/icons/ibmlogo.png" class="logo" >
+<div class="username">Welcome : John Doe</div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2 offset-md-10">
+          <button type="button" class="createSOWBtn" (click)="navigateTosearcheSOW()">Search SOW</button>
+        </div>
+      </div>
+      <div class="row">
+        <header>SoW Tracker</header>
+      </div>
+      <form [formGroup]="chooseSowForm">
+      <div class="row">
+        <mat-radio-button class="radio"  value="OR" [checked]="true" (change)="radioChange($event)">New SoW</mat-radio-button>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+              <mat-label>Region</mat-label>
+              <mat-select [disabled]="!isDisabled" formControlName="region">
+                <mat-option value="NA"> NA </mat-option>
+                <mat-option value="COG">COG</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+                <mat-label>Year</mat-label>
+                <mat-select [disabled]="!isDisabled" formControlName="year"> 
+                  <mat-option *ngFor="let year of years" [value]="year.year"> {{year.year}} </mat-option>
+                </mat-select>
+              </mat-form-field>
+          </div>
+    </div>
+    <div class="row">
+        <mat-radio-button class="radio"  value="CR" (change)="radioChange($event)" >Change Request</mat-radio-button>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+
+            <mat-form-field appearance="fill">
+              <mat-label>Original SoW</mat-label>
+              <mat-select [disabled]="isDisabled" (selectionChange)="generateSOWCR($event.value)" formControlName="originalSow">
+                <mat-option *ngFor="let sow of originalSow" [value]="sow.originalSoWPattern"> {{sow.originalSoWPattern}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        <div class="col-md-4">
+            <mat-form-field appearance="fill">
+              <mat-label>SoW</mat-label>
+              <input matInput readonly="true" type="text" [disabled]="isDisabled" formControlName="sow">
+            </mat-form-field>
+          </div>
+    </div>
+  </form>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="button" class="searchBtn"  
+            [ngClass]="{'disableBtn': buttonDisabled === true, 'enableBtn' : buttonDisabled === false }" 
+            [disabled]="buttonDisabled"
+            (click)="navigateTocreateSOW()">Submit</button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="resetBtn" (click)="navigateTosearcheSOW()">Cancel</button>
+        </div>
+    </div>
+    <hr>
+</div>
+<div class="footer">
+  <div class="footer__social-section-links">
+    <div class="footer__social-section-links-item">
+      © 2022 IBM
+    </div>
+
+  </div>
+</div>
